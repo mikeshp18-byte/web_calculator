@@ -1,5 +1,5 @@
 const API_URL =
-  "https://zjyffa93q9.execute-api.us-east-1.amazonaws.com/dev/report";
+  "https://zjyffa93q9.execute-api.us-east-1.amazonaws.com/dev/calculate";
 
 async function calculate() {
   const num1 = document.getElementById("num1").value;
@@ -29,16 +29,18 @@ async function calculate() {
 
     const data = await response.json();
 
+    console.log("API response:", data);
+
     if (!response.ok) {
       resultElement.textContent =
-        "Result: " + (data.error || "Something went wrong");
+        "Result: " + (data.error || "API error");
       return;
     }
 
     resultElement.textContent = "Result: " + data.result;
 
   } catch (error) {
-    console.error(error);
+    console.error("Calculator error:", error);
     resultElement.textContent = "Result: Unable to connect to API";
   }
 }
